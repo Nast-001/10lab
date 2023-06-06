@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Binary Watch</title>
+</head>
+<body>
+  <script >
+  var readBinaryWatch = function(num) {
+  var res = [];
+// Перебир всех вариантов
+  for (var i = 0; i < 12; i++) {
+    for (var j = 0; j < 60; j++) {
+//     Выбираются те, в которых колличесвто равно указанному 
+      if (numberOfDigit(i) + numberOfDigit(j) === num) {
+//           Добавляем в массив в нужном формате
+        res.push(i + ':' + (j < 10 ? ('0' + j) : j));
+      }
+    }
+  }
+  return res;
+};
+
+var numberOfDigit = function (num) {
+  var n = 0;
+  var tmp = 0;
+  for (var i = 5; i >= 0; i--) {
+//       Цикл для сдвиивания влево на указзное количесвто бит первый операнд (1)
+    tmp = 1 << i;
+    if (num >= tmp) {
+      n++;
+      num -= tmp;
+    }
+  }
+  return n;
+};
+
+  </script>
+</body>
+</html>

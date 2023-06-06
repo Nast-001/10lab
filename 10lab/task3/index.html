@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Generating all valid bracket sequences</title>
+</head>
+<body>
+  <script >
+   var generateParenthesis = function(n) {
+ let optionsArray = [];
+
+    function innerGenerateParentheses(
+        currentString,
+        openBrackets,
+        closedBrackets,
+        maximumPairs
+    ) {
+        // Если текущая строка заполнена то обавляем её в список возможностей
+        if (currentString.length == maximumPairs * 2) {
+            
+            optionsArray.push(currentString);
+            return;
+        }
+
+        // Если можно открыть больше скобок то вызываем функцию снова, с одной открытой скобкой
+        if (openBrackets < maximumPairs) {
+            
+            innerGenerateParentheses(
+                currentString + '(',
+                openBrackets + 1,
+                closedBrackets,
+                maximumPairs
+            );
+        }
+
+        // Если открытые скобки все же нужно закрытьто вызываем функцию еще раз, закрыв одну дополнительную скобку
+        if (closedBrackets < openBrackets) {
+            
+            innerGenerateParentheses(
+                currentString + ')',
+                openBrackets,
+                closedBrackets + 1,
+                maximumPairs
+            );
+        }
+    }
+
+    // Рекурсивно получить все возможности
+    innerGenerateParentheses('', 0, 0, n);
+    return optionsArray;    
+};
+  </script>
+</body>
+</html>

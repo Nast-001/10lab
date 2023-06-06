@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>N-queens</title>
+</head>
+<body>
+  <script >
+   var solveNQueens = function(n) {
+    const output = [];
+    backtrack(output, n);
+    return output;
+};
+
+function backtrack(output, n, board = [], r = 0) {
+    // Если мы разместили на доске n-ое кол-во королев, то создать достку в виде строки и добавить её в вывод
+    if (r === n) {
+        output.push(board.map(c => '.'.repeat(c) + 'Q' + '.'.repeat(n - c - 1)));
+        return;
+    }
+    // пробегаемся по циклу для нахождения места для безопсного добавления королевы
+    for (let c = 0; c < n; c++) {
+       // проверка на защищенность по диагонали, горизонатли и вертикали
+        if (!board.some((bc, br) => bc === c  bc === c + r - br  bc === c - r + br)) {
+            // поместить ферзя в текущий столбец
+            board.push(c);
+            // переход к следующему ряду
+            backtrack(output, n, board, r + 1);
+            board.pop();
+        }
+    }
+}
+  </script>
+</body>
+</html>
